@@ -13,7 +13,7 @@ public class FixedRotation : MonoBehaviour
         lastBallPosition = HamsterPosition.position;
     }
 
-    void LateUpdate()
+    void Update()
     {
         //Keep Position
         transform.position = HamsterPosition.position + offset;
@@ -22,9 +22,10 @@ public class FixedRotation : MonoBehaviour
         Vector3 moveDirection = HamsterPosition.position - lastBallPosition;
         moveDirection.y = 0f; 
         
-        if (moveDirection.magnitude > 0.01f)
+        if (moveDirection.sqrMagnitude > 0.0001f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            targetRotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
