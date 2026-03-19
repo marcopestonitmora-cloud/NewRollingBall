@@ -3,13 +3,27 @@ using UnityEngine;
 
 public class ClockTimer : MonoBehaviour
 {
-    public float timer { get; private set; } = 240f;
+    public float realTime { get; private set;}
+    public int clocktimer 
+    {
+        get => (int)realTime;
+        private set
+        {
+            realTime = value;
+
+            if (realTime < 0)
+            {
+                realTime = 0;   
+            }
+        }
+    }
+    
     [SerializeField] private TextMeshProUGUI timerText;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        timerText.text = $"{timerText}";
+        timerText.text = $"{clocktimer}";
     }
 
     // Update is called once per frame
@@ -20,7 +34,13 @@ public class ClockTimer : MonoBehaviour
 
     public void Clocktimer()
     {
-        timer -= Time.deltaTime;
-        timerText.text = $"{timer}";
+        realTime += Time.deltaTime;
+
+        if (realTime >= 1f)
+        {
+            realTime = 0;
+            clocktimer--;
+            timerText.text = $"{clocktimer}";
+        }
     }
 }

@@ -5,7 +5,19 @@ using UnityEngine;
 public class PlayerInteractionSystem : MonoBehaviour
 {
     private PlayerMain main;
-    public int cheeseCounter { get; private set; } = 0;
+    public int cheeseCounter 
+    {
+        get => (int)cheeseCounter;
+        private set
+        {
+            cheeseCounter = value;
+
+            if (cheeseCounter > 10)
+            {
+                cheeseCounter = 10;   
+            }
+        }
+    }
  
     [SerializeField] private TextMeshProUGUI cheeseTextCounter;
     
