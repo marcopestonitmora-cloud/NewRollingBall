@@ -10,7 +10,7 @@ public class PlayerMovementSystem : MonoBehaviour
     [SerializeField] private float speed = 5f;
     [SerializeField] private float JumpForce = 7f;
     private bool IsGrounded;
-    private float maxRayDistance = 1.1f;
+    private float maxRayDistance = 1f;
     
     [Header("Camera")]
     [SerializeField] private Transform cameraTransform;
