@@ -23,7 +23,7 @@ public class PlayerMovementSystem : MonoBehaviour
 
     void Start()
     {
-        
+        IsGrounded = true;
     }
 
     
@@ -48,6 +48,10 @@ public class PlayerMovementSystem : MonoBehaviour
         if (Physics.Raycast(transform.position, Vector3.down, maxRayDistance))
         {
             IsGrounded = true;
+        }
+        else
+        {
+            IsGrounded = false;
         }
 
         if (IsGrounded == true && Input.GetKeyDown(KeyCode.Space))

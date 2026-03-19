@@ -5,13 +5,14 @@ using UnityEngine;
 public class PlayerInteractionSystem : MonoBehaviour
 {
     private PlayerMain main;
-    [SerializeField] private Cheese Cheese;
+    public int cheeseCounter { get; private set; } = 0;
+ 
     [SerializeField] private TextMeshProUGUI cheeseTextCounter;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        cheeseTextCounter.text = $"{cheeseCounter}/10";
     }
 
     // Update is called once per frame
@@ -20,11 +21,9 @@ public class PlayerInteractionSystem : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void AddCheese()
     {
-        if (other.GetComponent<Cheese>() != null)
-        {
-            cheeseTextCounter.text = $"{Cheese.cheeseCounter}/10";
-        }
+        cheeseCounter++;
+        cheeseTextCounter.text = $"{cheeseCounter}/10";
     }
 }

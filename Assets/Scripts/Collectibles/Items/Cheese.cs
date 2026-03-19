@@ -3,11 +3,17 @@ using UnityEngine;
 
 public class Cheese: Collectible
 {
-    public int cheeseCounter { get; private set; } = 0;
-
+    private PlayerInteractionSystem interaction;
+    
     public override void ItemCollected(GameObject player)
     {
-        cheeseCounter++;
+        interaction = player.GetComponent<PlayerInteractionSystem>();
+
+        if (interaction != null)
+        {
+            interaction.AddCheese();
+        }
+
         Destroy(this.gameObject);
     }
 
