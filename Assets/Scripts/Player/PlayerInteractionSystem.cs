@@ -1,10 +1,12 @@
 using System;
+using TMPro;
 using UnityEngine;
 
 public class PlayerInteractionSystem : MonoBehaviour
 {
     private PlayerMain main;
     [SerializeField] private Cheese Cheese;
+    [SerializeField] private TextMeshProUGUI cheeseTextCounter;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,7 +24,7 @@ public class PlayerInteractionSystem : MonoBehaviour
     {
         if (other.GetComponent<Cheese>() != null)
         {
-            Console.WriteLine($"Colected cheese: {Cheese.cheeseCounter}");
+            cheeseTextCounter.text = $"{Cheese.cheeseCounter}/10";
         }
     }
 }
