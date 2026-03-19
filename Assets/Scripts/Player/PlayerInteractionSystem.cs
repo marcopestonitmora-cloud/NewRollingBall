@@ -5,16 +5,17 @@ using UnityEngine;
 public class PlayerInteractionSystem : MonoBehaviour
 {
     private PlayerMain main;
+    private int _cheeseCounter = 0;
     public int cheeseCounter 
     {
-        get => (int)cheeseCounter;
+        get => _cheeseCounter;
         private set
         {
-            cheeseCounter = value;
+            _cheeseCounter = value;
 
-            if (cheeseCounter > 10)
+            if (_cheeseCounter > 10)
             {
-                cheeseCounter = 10;   
+                _cheeseCounter = 10;   
             }
         }
     }

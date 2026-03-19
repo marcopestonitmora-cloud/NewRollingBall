@@ -4,16 +4,17 @@ using UnityEngine;
 public class ClockTimer : MonoBehaviour
 {
     public float realTime { get; private set;}
+    private int _realTime = 240;
     public int clocktimer 
     {
-        get => (int)realTime;
+        get => _realTime;
         private set
         {
-            realTime = value;
+            _realTime = value;
 
-            if (realTime < 0)
+            if (_realTime < 0)
             {
-                realTime = 0;   
+                _realTime = 0;   
             }
         }
     }
@@ -42,5 +43,10 @@ public class ClockTimer : MonoBehaviour
             clocktimer--;
             timerText.text = $"{clocktimer}";
         }
+    }
+
+    public void MoreTime()
+    {
+        clocktimer += 20;
     }
 }
