@@ -1465,7 +1465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractionSystem
   Cheese: {fileID: 363387249}
-  cheeseTextCounter: {fileID: 0}
+  cheeseTextCounter: {fileID: 141130403}
 --- !u!1 &1949244679
 GameObject:
   m_ObjectHideFlags: 0
