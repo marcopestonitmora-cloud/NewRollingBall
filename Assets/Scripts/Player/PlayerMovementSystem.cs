@@ -9,11 +9,17 @@ public class PlayerMovementSystem : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float speed = 5f;
     [SerializeField] private float JumpForce = 7f;
-    private bool IsGrounded;
+    private bool isGrounded;
     private float maxRayDistance = 1f;
+    private bool isMoving = false;
     
     [Header("Camera")]
     [SerializeField] private Transform cameraTransform;
+    
+    [Header("Audio")]
+    [SerializeField] private AudioSource rollingSound;
+    [SerializeField] private AudioClip jumpSound;
+    [SerializeField] private float JumpSoundVolume = 0.8f;
     
     private void Awake()
     {
@@ -23,7 +29,8 @@ public class PlayerMovementSystem : MonoBehaviour
 
     void Start()
     {
-        IsGrounded = true;
+        isGrounded = true;
+        isMoving = false;
     }
 
     
@@ -44,19 +51,31 @@ public class PlayerMovementSystem : MonoBehaviour
         right.Normalize();
 
         movement = (forward * vInput + right * hInput).normalized;
-
-        if (Physics.Raycast(transform.position, Vector3.down, maxRayDistance))
+        
+        isMoving = movement.magnitude > 0.1f;
+        
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, maxRayDistance);
+        
+        if (isGrounded && isMoving)
         {
-            IsGrounded = true;
+            if (!rollingSound.isPlaying)
+            {
+                 rollingSound.Play();
+            }
+
         }
         else
         {
-            IsGrounded = false;
+            if (rollingSound.isPlaying)
+            {
+                rollingSound.Stop();
+            }
         }
-
-        if (IsGrounded == true && Input.GetKeyDown(KeyCode.Space))
+        
+        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
-            IsGrounded = false;
+            isGrounded = false;
+            AudioManager.instance.PlaySound(jumpSound,JumpSoundVolume);
             Jump();
         }
     }

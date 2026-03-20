@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerInteractionSystem : MonoBehaviour
 {
+
+    
     [SerializeField] private TextMeshProUGUI cheeseTextCounter;
     private PlayerMain main;
     private int _cheeseCounter = 0;

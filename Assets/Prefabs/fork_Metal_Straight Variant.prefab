@@ -104,3 +104,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Cutlery
   livesManager: {fileID: 0}
+  damageVisual: {fileID: 0}
+  hitSound: {fileID: 8300000, guid: 305ef60a9a9386b42b3a961e3d6a4f5f, type: 3}
+  hitSoundVolume: 10

@@ -4,6 +4,8 @@ using UnityEngine;
 public class Cheese: Collectible
 {
     private PlayerInteractionSystem interaction;
+    [SerializeField] private AudioClip eatCheese;
+    [SerializeField] private float eatCheeseVolume = 5f;
     
     public override void ItemCollected(GameObject player)
     {
@@ -11,6 +13,7 @@ public class Cheese: Collectible
 
         if (interaction != null)
         {
+            AudioManager.instance.PlaySound(eatCheese,eatCheeseVolume);
             interaction.AddCheese();
         }
 
