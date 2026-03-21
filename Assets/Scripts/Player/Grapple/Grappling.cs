@@ -4,7 +4,7 @@ public class Grappling : MonoBehaviour
 {
    [Header("References")] 
    [SerializeField] private PlayerMovementSystem movementGrappling;
-   [SerializeField] private Transform camera;
+   [SerializeField] private Transform cam;
    [SerializeField] private Transform gunTip;
    public LayerMask whatIsGrappable;
 
@@ -27,8 +27,7 @@ public class Grappling : MonoBehaviour
    private bool isGrappling;
 
    [Header("Audio")]
-   [SerializeField] private AudioClip grappleShootSound;
-   [SerializeField] private float grappleShootVolume = 1f;
+   [SerializeField] private AudioSource grappleShootSound;
    
    void Start()
    {
@@ -75,16 +74,16 @@ public class Grappling : MonoBehaviour
       isGrappling = true;
       movementGrappling.freeze = true;
 
-      if (Physics.Raycast(gunTip.position, camera.forward, out hit, maxGrapplingDistance, whatIsGrappable))
+      if (Physics.Raycast(gunTip.position, cam.forward, out hit, maxGrapplingDistance, whatIsGrappable))
       {
-         AudioManager.instance.PlaySound(grappleShootSound,grappleShootVolume);
+         grappleShootSound.Play();
          grapplePoint = hit.point;
          Invoke(nameof(ExecuteGrappling), grappleStartDelay); //Llamamos a la siguiente funcion pero con un pequeño delay
       }
       else
       {
          //Si no hiteas, aun asi sale el gancho pero sin impactar
-         grapplePoint = gunTip.position + camera.forward * maxGrapplingDistance;
+         grapplePoint = gunTip.position + cam.forward * maxGrapplingDistance;
          Invoke(nameof(StopGrappling), grappleStartDelay);
       }
       
