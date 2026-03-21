@@ -26,6 +26,10 @@ public class Grappling : MonoBehaviour
    public KeyCode grabKey = KeyCode.Mouse1;
    private bool isGrappling;
 
+   [Header("Audio")]
+   [SerializeField] private AudioClip grappleShootSound;
+   [SerializeField] private float grappleShootVolume = 1f;
+   
    void Start()
    {
       movementGrappling = GetComponent<PlayerMovementSystem>();
@@ -73,6 +77,7 @@ public class Grappling : MonoBehaviour
 
       if (Physics.Raycast(gunTip.position, camera.forward, out hit, maxGrapplingDistance, whatIsGrappable))
       {
+         AudioManager.instance.PlaySound(grappleShootSound,grappleShootVolume);
          grapplePoint = hit.point;
          Invoke(nameof(ExecuteGrappling), grappleStartDelay); //Llamamos a la siguiente funcion pero con un pequeño delay
       }

@@ -2961,6 +2961,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8235436945746459118, guid: d6b948bf65bf50043965a8119575c8f9, type: 3}
+      propertyPath: eatCheeseVolume
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3308,6 +3312,8 @@ MonoBehaviour:
   grapplePullForce: 30
   maxPullSpeed: 25
   grabKey: 324
+  grappleShootSound: {fileID: 8300000, guid: f8cbea2ee3e5ee547844f3c7118ae00b, type: 3}
+  grappleShootVolume: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
