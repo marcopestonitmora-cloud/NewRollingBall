@@ -16,12 +16,12 @@ public class SmoothRotation : MonoBehaviour
 
         // --- ROTACIÓN VERTICAL (CÁMARA) ---
         xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -10f, 45f); 
+        xRotation = Mathf.Clamp(xRotation, -180f, 180f); 
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
         // --- ROTACIÓN HORIZONTAL (JUGADOR) ---
         yRotation += mouseX;
-        yRotation = Mathf.Clamp(yRotation, -90f, 90f);
+        yRotation = Mathf.Clamp(yRotation, -180f, 180f);
         playerBody.localRotation = Quaternion.Euler(0f, yRotation, 0f);
     }
 }
