@@ -37,48 +37,52 @@ public class PlayerMovementSystem : MonoBehaviour
     
     void Update()
     {
-        Freeze();
-        
-        //The player’s movement input is modified based on the facing camera direction
-        float hInput = Input.GetAxis("Horizontal");
-        float vInput = Input.GetAxis("Vertical");
-
-        Vector3 forward = cameraTransform.forward;
-        Vector3 right = cameraTransform.right;
-
-        forward.y = 0;
-        right.y = 0;
-
-        forward.Normalize();
-        right.Normalize();
-
-        movement = (forward * vInput + right * hInput).normalized;
-        
-        isMoving = movement.magnitude > 0.1f;
-        
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, maxRayDistance);
-        
-        if (isGrounded && isMoving)
+        if (!StartPanel.isPanelActive)
         {
-            if (!rollingSound.isPlaying)
+            
+            Freeze();
+        
+            //The player’s movement input is modified based on the facing camera direction
+            float hInput = Input.GetAxis("Horizontal");
+            float vInput = Input.GetAxis("Vertical");
+
+            Vector3 forward = cameraTransform.forward;
+            Vector3 right = cameraTransform.right;
+
+            forward.y = 0;
+            right.y = 0;
+
+            forward.Normalize();
+            right.Normalize();
+
+            movement = (forward * vInput + right * hInput).normalized;
+        
+            isMoving = movement.magnitude > 0.1f;
+        
+            isGrounded = Physics.Raycast(transform.position, Vector3.down, maxRayDistance);
+        
+            if (isGrounded && isMoving)
             {
-                 rollingSound.Play();
-            }
+                if (!rollingSound.isPlaying)
+                {
+                    rollingSound.Play();
+                }
 
-        }
-        else
-        {
-            if (rollingSound.isPlaying)
-            {
-                rollingSound.Stop();
             }
-        }
+            else
+            {
+                if (rollingSound.isPlaying)
+                {
+                    rollingSound.Stop();
+                }
+            }
         
-        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
-        {
-            isGrounded = false;
-            AudioManager.instance.PlaySound(jumpSound,JumpSoundVolume);
-            Jump();
+            if (isGrounded && Input.GetKeyDown(KeyCode.Space))
+            {
+                isGrounded = false;
+                AudioManager.instance.PlaySound(jumpSound,JumpSoundVolume);
+                Jump();
+            }
         }
     }
 

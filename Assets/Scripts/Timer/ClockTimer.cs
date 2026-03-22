@@ -35,13 +35,17 @@ public class ClockTimer : MonoBehaviour
 
     public void Clocktimer()
     {
-        realTime += Time.deltaTime;
-
-        if (realTime >= 1f)
+        if (!StartPanel.isPanelActive)
         {
-            realTime = 0;
-            clocktimer--;
-            timerText.text = $"{clocktimer}";
+            
+            realTime += Time.deltaTime;
+
+            if (realTime >= 1f)
+            {
+                realTime = 0;
+                clocktimer--;
+                timerText.text = $"{clocktimer}";
+            }   
         }
     }
 
