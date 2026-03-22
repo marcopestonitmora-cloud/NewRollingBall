@@ -1,7 +1,15 @@
+using System;
 using UnityEngine;
 
 public class CameraMouseLock : MonoBehaviour
 {
+    public PlayerMain main;
+
+    private void Awake()
+    {
+        main = FindFirstObjectByType<PlayerMain>();
+    }
+
     void Start()
     {
         Cursor.visible = false;
@@ -10,9 +18,20 @@ public class CameraMouseLock : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape)) 
         {
-            Cursor.visible = true;
+            Cursor.visible = true; 
+            Cursor.lockState = CursorLockMode.None;
+        }
+        
+        if (main.isPlaying)
+        { 
+            Cursor.visible = false; 
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        { 
+            Cursor.visible = true; 
             Cursor.lockState = CursorLockMode.None;
         }
     }

@@ -7,22 +7,29 @@ public class LivesManager : MonoBehaviour
     [SerializeField]public Image vida1;
     [SerializeField]public Image vida2;
     [SerializeField]public Image vida3;
+    public PlayerMain main;
     
     private int livesCounter = 3;
-    public int _livesCounter 
+    public int LivesCounter
     {
         get => livesCounter;
         private set
         {
-            if (livesCounter <= 0)
-            {
+            if (value < 0)
                 livesCounter = 0;
-                SceneManager.LoadScene(0);
-            }
+            else if (value > 3)
+                livesCounter = 3;
+            else
+                livesCounter = value;
         }
     }
 
+    private void Awake()
+    {
+        main = FindObjectOfType<PlayerMain>();
+    }
 
+    
     public void LoseLives()
     {
         livesCounter--;
@@ -37,6 +44,16 @@ public class LivesManager : MonoBehaviour
         else if (livesCounter == 0)
         {
             vida1.enabled = false;
+
+            if (main != null)
+            {
+                 main.isPlaying = false;
+            }
+            
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
+            SceneManager.LoadScene(2);
         }
     }
 }

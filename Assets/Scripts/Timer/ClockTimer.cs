@@ -1,8 +1,15 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ClockTimer : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private AudioClip tiktak;
+    public PlayerMain main;
+    private bool played60 = false;
+    private bool played40 = false;
+    private bool played20 = false;
     public float realTime { get; private set;}
     private int _realTime = 240;
     public int clocktimer 
@@ -18,8 +25,12 @@ public class ClockTimer : MonoBehaviour
             }
         }
     }
-    
-    [SerializeField] private TextMeshProUGUI timerText;
+
+    void Awake()
+    {
+        main = FindObjectOfType<PlayerMain>();
+    }
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -37,7 +48,6 @@ public class ClockTimer : MonoBehaviour
     {
         if (!StartPanel.isPanelActive)
         {
-            
             realTime += Time.deltaTime;
 
             if (realTime >= 1f)
@@ -46,6 +56,35 @@ public class ClockTimer : MonoBehaviour
                 clocktimer--;
                 timerText.text = $"{clocktimer}";
             }   
+        }
+
+        if (clocktimer == 60 && !played60)
+        {
+            played60 = true;
+            AudioManager.instance.PlaySound(tiktak,1f);
+        }
+        else if (clocktimer == 40 && !played40)
+        {
+            played40 = true;
+            AudioManager.instance.PlaySound(tiktak,1f);
+        }
+        else if (clocktimer == 20 && !played20)
+        {
+            played20 = true;
+            AudioManager.instance.PlaySound(tiktak,1f);
+        }
+
+        if (clocktimer == 0)
+        {
+            if (main != null)
+            {
+                main.isPlaying = false;
+            }
+            
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
+            SceneManager.LoadScene(2);
         }
     }
 

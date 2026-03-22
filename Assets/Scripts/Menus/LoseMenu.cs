@@ -9,13 +9,16 @@ public class LoseMenu : MonoBehaviour
 
     public void PlayAgain()
     {
+        Debug.Log("BOTÓN FUNCIONA");
         AudioManager.instance.PlaySound(playButton,1f);
         SceneManager.LoadScene(1);
     }
 
     public void Exit()
     {
+        Debug.Log("BOTÓN FUNCIONA");
         AudioManager.instance.PlaySound(exitButton,1f);
-        SceneManager.LoadScene(0);
+        Debug.Log("Closing the game...");
+        Application.Quit();
     }
 }
